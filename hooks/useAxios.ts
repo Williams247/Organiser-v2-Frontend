@@ -9,7 +9,7 @@ export const useAxios = (): UseAxiosResponse => {
   const [loading, setLoading] = useState<boolean>(false);
 
   const axios = Axios.create({
-    baseURL: process.env.NEXT_PUBLIC_BASE_URL,
+    baseURL: `${process.env.NEXT_PUBLIC_BASE_URL}/v2`,
   });
 
   axios.interceptors.request.use((config) => {
