@@ -17,7 +17,6 @@ const nextConfig = {
     loader: "cloudinary",
     path: "https://res.cloudinary.com/dm1ta9lno/image/upload/",
   },
-  transpilePackages: ["frontend-lib", "libraries"]
 }
 
 module.exports = withPWA({ ...nextConfig });

@@ -1,17 +1,16 @@
-import { FC, useState, useEffect } from "react";
-import { SpinnerCircular } from "spinners-react";
-import { useDeleteActivity, useUpdateActivity } from "@hooks/useActivities";
-import { ActivitiesResponse } from "@hooks/utils/types";
-
 import {
   CircleCheck,
   CircleUncheck,
   Delete,
-  Maximize,
   Edit,
+  Maximize,
 } from "@components/icons";
+import { useDeleteActivity, useUpdateActivity } from "@hooks/useActivities";
+import { ActivitiesResponse } from "@hooks/utils/types";
+import { FC, useEffect,useState } from "react";
+import { SpinnerCircular } from "spinners-react";
 
-import { ConfirmModal, FullView, EditActivity } from "../../modal";
+import { ConfirmModal, EditActivity,FullView } from "../../modal";
 
 interface Props {
   data: ActivitiesResponse;
@@ -19,7 +18,7 @@ interface Props {
   percentageMutate: () => void;
 }
 
-type FUllActivityStateProps = {
+interface FUllActivityStateProps {
   todo: string;
   note: string;
   open: boolean;
@@ -28,7 +27,7 @@ type FUllActivityStateProps = {
   isChecked: boolean | undefined;
   createdAt: string;
   updatedAt: string;
-};
+}
 
 export const List: FC<Props> = ({ data, mutate, percentageMutate }) => {
   const [open, setOpen] = useState(false);
@@ -98,7 +97,7 @@ export const List: FC<Props> = ({ data, mutate, percentageMutate }) => {
                         todo,
                         note,
                       });
-                      setUpdateId(_id as string);
+                      setUpdateId(_id ?? '');
                     }}
                   >
                     {updating && updateId === _id ? (
@@ -123,7 +122,7 @@ export const List: FC<Props> = ({ data, mutate, percentageMutate }) => {
                         open: true,
                         type: "maximize",
                         activityId: _id ?? "",
-                        isChecked: isChecked as boolean,
+                        isChecked: isChecked,
                         createdAt: createdAt ?? "",
                         updatedAt: updatedAt ?? "",
                       })
@@ -139,7 +138,7 @@ export const List: FC<Props> = ({ data, mutate, percentageMutate }) => {
                         open: true,
                         type: "edit",
                         activityId: _id ?? "",
-                        isChecked: isChecked as boolean,
+                        isChecked: isChecked ,
                         createdAt: createdAt ?? "",
                         updatedAt: updatedAt ?? "",
                       })

@@ -1,7 +1,8 @@
-import { FC, useState } from "react";
-import { FormSelectInput } from "./FormSelect";
-import { Search } from "@icons/Search";
 import { Reload } from "@icons/Reload";
+import { Search } from "@icons/Search";
+import { FC, useState } from "react";
+
+import { FormSelectInput } from "./FormSelect";
 
 interface Props {
   className?: string;

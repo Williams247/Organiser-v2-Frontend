@@ -1,14 +1,8 @@
-import { useEffect, useState } from "react";
-import { NextPage } from "next";
-import { useForm } from "react-hook-form";
-import { joiResolver } from "@hookform/resolvers/joi";
-import Pagination from "react-responsive-pagination";
-import { ActivitiesPayload } from "@utils/default";
-import { UseGeneralStateContext } from "@state/general";
-import { Layout } from "../layout";
-import { ProgressBar, List } from "@components/pageComponents/activities";
-import { Modal, FormInput, FormButton, FormWiziwig } from "@components/widgets";
 import { Loader } from "@components/loader";
+import { List,ProgressBar } from "@components/pageComponents/activities";
+import { FormButton, FormInput, FormWiziwig,Modal } from "@components/widgets";
+import { FormSearhFilter } from "@components/widgets";
+import { joiResolver } from "@hookform/resolvers/joi";
 import {
   useCreateActivities,
   useFetchActivities,
@@ -16,7 +10,14 @@ import {
 } from "@hooks/useActivities";
 import { ActivitesForm } from "@hooks/utils/form/activities";
 import { ActivitesSchema } from "@hooks/utils/validation";
-import { FormSearhFilter } from "@components/widgets";
+import { UseGeneralStateContext } from "@state/general";
+import { ActivitiesPayload } from "@utils/default";
+import { NextPage } from "next";
+import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import Pagination from "react-responsive-pagination";
+
+import { Layout } from "../layout";
 
 const Activities: NextPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -60,7 +61,7 @@ const Activities: NextPage = () => {
       formHook.reset();
       if (mutate) {
         mutate();
-        percentageMutate();
+        void percentageMutate();
       }
     }
   }, [loading, success, currentPage]);

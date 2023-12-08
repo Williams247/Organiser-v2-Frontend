@@ -1,7 +1,7 @@
-import { FC } from 'react';
-import { Modal } from '@widgets/Modal';
-import { Speaker } from '@icons/Speaker';
 import { UseTextToAudio } from '@hooks/useTextToAudio';
+import { Speaker } from '@icons/Speaker';
+import { Modal } from '@widgets/Modal';
+import { FC } from 'react';
 
 interface Props {
   onClose: () => void;

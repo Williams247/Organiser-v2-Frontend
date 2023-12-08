@@ -1,6 +1,6 @@
-import { FC } from 'react';
-import { Modal } from '@widgets/Modal';
 import { FormButton } from '@widgets/form/FormButton';
+import { Modal } from '@widgets/Modal';
+import { FC } from 'react';
 
 interface Props {
   open: boolean;

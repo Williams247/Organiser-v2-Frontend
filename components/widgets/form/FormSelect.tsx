@@ -1,6 +1,7 @@
-import { useState } from "react"
 import { MenuItem } from '@utils/common';
+import { useState } from "react"
 import { FC, useRef } from 'react';
+
 import { CaretDownIcon } from '../../icons';
 
 type OnChangeValuesProps = string | number;

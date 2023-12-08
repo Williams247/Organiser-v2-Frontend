@@ -1,29 +1,30 @@
-import { useEffect } from 'react';
-import { NextPage } from 'next';
-import { useRouter } from 'next/router';
-import { useForm } from 'react-hook-form';
-import { joiResolver } from '@hookform/resolvers/joi';
-import { UseGeneralStateContext } from '@state/general';
-import { UserPayload } from '@utils/default';
-import { Layout } from '../layout';
 import { Loader } from '@components/loader';
 import {
-  FormPasswordInput,
-  FormInput,
   FormButton,
+  FormInput,
+  FormPasswordInput,
   FormWiziwig,
   Modal,
 } from '@components/widgets';
-import { ProfileForm, UpdateProfileSchema } from '@hooks/useProfile/utils';
-import { useFetchProfile, useUpdateProfile } from '@hooks/useProfile';
-import { ActivitiesPayload } from '@utils/default';
+import { joiResolver } from '@hookform/resolvers/joi';
 import {
   useCreateActivities,
   useFetchActivities,
   useFetchActivityPercentage,
 } from '@hooks/useActivities';
+import { useFetchProfile, useUpdateProfile } from '@hooks/useProfile';
+import { ProfileForm, UpdateProfileSchema } from '@hooks/useProfile/utils';
 import { ActivitesForm } from '@hooks/utils/form/activities';
 import { ActivitesSchema } from '@hooks/utils/validation';
+import { UseGeneralStateContext } from '@state/general';
+import { UserPayload } from '@utils/default';
+import { ActivitiesPayload } from '@utils/default';
+import { NextPage } from 'next';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
+import { useForm } from 'react-hook-form';
+
+import { Layout } from '../layout';
 
 const Profile: NextPage = () => {
   const { push } = useRouter();
@@ -68,7 +69,7 @@ const Profile: NextPage = () => {
 
   useEffect(() => {
     if (!updatingProfile && updateProfileSuccess) {
-      mutate();
+      void mutate();
       formHook.setValue('password', '');
       formHook.setValue('confirmPassword', '');
     }
@@ -77,7 +78,7 @@ const Profile: NextPage = () => {
   useEffect(() => {
     if (!fetching && activitySuccess) {
       handleOpenCloseMenu(false);
-      if (percentageMutate) percentageMutate();
+      if (percentageMutate) void percentageMutate();
       if (activityMutate) activityMutate();
       void push('/activities');
     }

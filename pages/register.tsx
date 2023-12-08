@@ -1,13 +1,13 @@
+import { AuthCard } from "@components/card";
+import { FormButton, FormInput, FormPasswordInput } from "@components/widgets";
+import { joiResolver } from "@hookform/resolvers/joi";
+import { useSignin } from "@hooks/useAuth/useSignin";
+import { RegisterForm } from "@hooks/utils/form";
+import { SigninSchema } from "@hooks/utils/validation";
+import { UserPayload } from "@utils/default";
 import { NextPage } from "next";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
-import { joiResolver } from "@hookform/resolvers/joi";
-import { UserPayload } from "@utils/default";
-import { FormInput, FormButton, FormPasswordInput } from "@components/widgets";
-import { AuthCard } from "@components/card";
-import { RegisterForm } from "@hooks/utils/form";
-import { SigninSchema } from "@hooks/utils/validation";
-import { useSignin } from "@hooks/useAuth/useSignin";
 
 const Register: NextPage = () => {
   const { loading, signin } = useSignin();

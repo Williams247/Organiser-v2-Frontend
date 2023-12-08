@@ -1,11 +1,12 @@
-import { FC, useEffect } from "react";
-import { useForm } from "react-hook-form";
+import { FormButton, FormInput,FormWiziwig } from "@components/widgets";
 import { joiResolver } from "@hookform/resolvers/joi";
-import { ActivitiesPayload } from "@utils/default";
-import { Modal } from "@widgets/Modal";
 import { ActivitesForm } from "@hooks/utils/form";
 import { ActivitesSchema } from "@hooks/utils/validation";
-import { FormWiziwig, FormButton, FormInput } from "@components/widgets";
+import { ActivitiesPayload } from "@utils/default";
+import { Modal } from "@widgets/Modal";
+import { FC, useEffect } from "react";
+import { useForm } from "react-hook-form";
+
 import { EditModalProps } from "./type";
 
 export const EditActivity: FC<EditModalProps> = ({
@@ -26,7 +27,7 @@ export const EditActivity: FC<EditModalProps> = ({
   useEffect(() => {
     formHook.setValue(ActivitesForm.TODO, todo);
     formHook.setValue(ActivitesForm.NOTE, note);
-  }, [todo, note]);
+  }, [todo, note, formHook]);
 
   return (
     <Modal open={open} onClose={onClose}>

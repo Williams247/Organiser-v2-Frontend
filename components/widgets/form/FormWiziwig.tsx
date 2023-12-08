@@ -1,13 +1,13 @@
 import { FC } from 'react';
+import { UseFormReturn } from 'react-hook-form';
 import {
   BtnBold,
   BtnItalic,
+  BtnUnderline,
   Editor,
   EditorProvider,
   Toolbar,
-  BtnUnderline,
 } from 'react-simple-wysiwyg';
-import { UseFormReturn } from 'react-hook-form';
 
 type ChangeEventProps = React.FormEvent<HTMLInputElement>;
 

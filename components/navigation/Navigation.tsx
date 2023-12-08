@@ -1,13 +1,12 @@
-import { useState, useEffect } from "react";
-import Link from "next/link";
-import { UseGeneralStateContext } from "@state/general";
-import { ThreeDots, PlusIcon } from "@components/icons";
-
+import { PlusIcon,ThreeDots } from "@components/icons";
 import {
   useDeleteAllActivities,
   useFetchActivities,
   useFetchActivityPercentage,
 } from "@hooks/useActivities";
+import { UseGeneralStateContext } from "@state/general";
+import Link from "next/link";
+import { useEffect,useState } from "react";
 
 import { ConfirmModal } from "../modal/ConfirmModal";
 
@@ -28,8 +27,8 @@ export const Navigation = () => {
   useEffect(() => {
     if (!loading && success) {
       setOpenConfirm(false);
-      if (mutate) mutate();
-      if (percentageMutate) percentageMutate();
+      if (mutate) void mutate();
+      if (percentageMutate) void percentageMutate();
     }
   }, [success, loading]);
 
