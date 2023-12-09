@@ -80,31 +80,51 @@ export const FormSearhFilter: FC<Props> = ({
               setSearchType(key as string);
             }}
             className={
-              "lex w-full sm:w-full md:w-full lg:w-[30%] mt-3 sm:mt-3 md:mt-3 lg:mt-0"
+              "w-full sm:w-full md:w-full lg:w-[30%] mt-3 sm:mt-3 md:mt-3 lg:mt-0"
             }
             items={searchParams}
             placeholder={"Select search method"}
           />
 
-          <button
-            className={
-              "flex sm:flex md:flex lg:inline mt-5 sm:mt-5 md:mt-5 lg:mt-0 gap-3 sm:gap-3 md:gap-3 lg:gap-0 justify-end sm:justify-end md:justify-end lg:justify-start"
-            }
-            onClick={sendSearchRequest}
-          >
-            <p className={"inline sm:inline md:inline lg:hidden"}>Search</p>
-            <Search />
-          </button>
+          <div className={"flex justify-end"}>
+            <div
+              className={
+                "flex flex-row-reverse sm:flex-row-reverse md:flex-row-reverse lg:flex-row gap-3 sm:gap-3 md:gap-3 lg:gap-2 flex-wrap"
+              }
+            >
+              <button
+                className={
+                  "flex sm:flex md:flex lg:inline mt-5 sm:mt-5 md:mt-5 lg:mt-0 gap-3 sm:gap-3 md:gap-3 lg:gap-0 justify-end sm:justify-end md:justify-end lg:justify-start bg-[#CC68EF] sm:bg-[#CC68EF] md:bg-[#CC68EF] lg:bg-transparent px-3 sm:px-3 md:px-3 lg:px-0 py-1 sm:py-1 md:py-1 lg:py-0 rounded-xl"
+                }
+                onClick={sendSearchRequest}
+              >
+                <p
+                  className={
+                    "inline sm:inline md:inline lg:hidden text-sm mt-[2px] ml-3 text-white font-bold"
+                  }
+                >
+                  Search
+                </p>
+                <Search className={"mt-[2px]"} />
+              </button>
 
-          <button
-            className={
-              "flex sm:flex md:flex lg:inline mt-3 sm:mt-3 md:mt-3 lg:mt-0 gap-3 sm:gap-3 md:gap-3 lg:gap-0 justify-end sm:justify-end md:justify-end lg:justify-start"
-            }
-            onClick={onReload}
-          >
-            <p className={"inline sm:inline md:inline lg:hidden"}>Reload</p>
-            <Reload />
-          </button>
+              <button
+                className={
+                  "flex sm:flex md:flex lg:inline mt-5 sm:mt-3 md:mt-3 lg:mt-0 gap-3 sm:gap-3 md:gap-3 lg:gap-0 justify-end sm:justify-end md:justify-end lg:justify-start border sm:border md:border lg:border-0 border-[#CC68EF] sm:border-[#CC68EF] md:border-[#CC68EF] lg:border-transparent px-3 sm:px-3 md:px-3 lg:px-0 py-1 sm:py-1 md:py-1 lg:py-0 rounded-xl text-[#CC68EF] font-bold"
+                }
+                onClick={onReload}
+              >
+                <p
+                  className={
+                    "inline sm:inline md:inline lg:hidden text-sm mt-[2px] ml-2"
+                  }
+                >
+                  Reload
+                </p>
+                <Reload className={"mt-[3px]"} />
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </>

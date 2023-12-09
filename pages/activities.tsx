@@ -51,7 +51,10 @@ const Activities: NextPage = () => {
   });
 
   const reloadLists = () => {
-    if (mutate) mutate();
+    if (mutate) {
+      mutate();
+      void percentageMutate();
+    }
     setSearchValue("");
   };
 
