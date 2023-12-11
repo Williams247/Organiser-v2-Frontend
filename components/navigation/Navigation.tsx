@@ -27,7 +27,7 @@ export const Navigation = () => {
   useEffect(() => {
     if (!loading && success) {
       setOpenConfirm(false);
-      if (mutate) void mutate();
+      if (mutate) mutate();
       if (percentageMutate) void percentageMutate();
     }
   }, [success, loading]);

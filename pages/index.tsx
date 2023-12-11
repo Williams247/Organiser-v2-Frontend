@@ -19,7 +19,7 @@ const Login: NextPage = () => {
   return (
     <>
       <div className={"h-screen flex justify-center items-center container"}>
-        <div className={"w-[80%] sm:w-[80%] md:w-[50%] lg:w-[35%]"}>
+        <div className={"w-[90%] sm:w-[90%] md:w-[50%] lg:w-[35%]"}>
           <AuthCard title={"Login"}>
             <div>
               <p>Please enter your details to sign in.</p>

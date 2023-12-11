@@ -20,6 +20,7 @@ export interface ActivitiesPayload {
 
 export interface UserPayload {
   id?: string;
+  _id?: string;
   firstName?: string;
   lastName?: string;
   email?: string;
@@ -28,4 +29,5 @@ export interface UserPayload {
   image?: string;
   verified?: boolean;
   role?: string;
+  disabled?: boolean;
 }

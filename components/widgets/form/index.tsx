@@ -29,18 +29,14 @@ export const FormSearhFilter: FC<Props> = ({
   const [searchType, setSearchType] = useState<string>("todos");
   const [todoSearchKeyWord, setTodoSearchKeyWord] = useState("");
   const [noteSearchKeyWord, setNoteSearchKeyWord] = useState("");
+  const [isSet, setIsSet] = useState(false);
 
   const sendSearchRequest = () => {
-    onSearch(
-      `${
-        searchType === "todos"
-          ? todoSearchKeyWord
-          : searchType === "notes"
-          ? noteSearchKeyWord
-          : ""
-      }`,
-      searchType
-    );
+    if (searchType === "todo" && !todoSearchKeyWord || searchType === "notes" && !noteSearchKeyWord) {
+      setIsSet(true);
+      return;
+    }
+    onSearch(`${searchType === "todos" ? todoSearchKeyWord : searchType === "notes" ? noteSearchKeyWord : ""}`, searchType);
   };
 
   return (
@@ -56,7 +52,10 @@ export const FormSearhFilter: FC<Props> = ({
               <input
                 type={"text"}
                 placeholder={"Search by todo..."}
-                onChange={(e) => setTodoSearchKeyWord(e.target.value)}
+                onChange={(e) => {
+                  setTodoSearchKeyWord(e.target.value.trim());
+                  setIsSet(e.target.value.trim().length === 0 ? true : false);
+                }}
                 className={
                   "outline-none px-3 text-[13px] py-2 w-full bg-transparent border border-[#cac5c5] rounded-lg"
                 }
@@ -67,7 +66,10 @@ export const FormSearhFilter: FC<Props> = ({
               <input
                 type={"text"}
                 placeholder={"Search by note..."}
-                onChange={(e) => setNoteSearchKeyWord(e.target.value)}
+                onChange={(e) => {
+                  setNoteSearchKeyWord(e.target.value.trim());
+                  setIsSet(e.target.value.trim().length === 0 ? true : false);
+                }}
                 className={
                   "outline-none px-3 text-[13px] py-2 w-full bg-transparent border border-[#cac5c5] rounded-lg"
                 }
@@ -126,6 +128,7 @@ export const FormSearhFilter: FC<Props> = ({
             </div>
           </div>
         </div>
+        {isSet && <p className={"text-[red] text-sm mt-2"}>Please enter a search keyword</p>}
       </div>
     </>
   );

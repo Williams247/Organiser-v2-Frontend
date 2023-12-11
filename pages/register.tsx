@@ -18,7 +18,7 @@ const Register: NextPage = () => {
   return (
     <>
       <div className={"h-screen flex justify-center items-center container"}>
-        <div className={"w-[80%] sm:w-[80%] md:w-[50%] lg:w-[35%] pb-16 pt-28"}>
+        <div className={"w-[90%] sm:w-[90%] md:w-[50%] lg:w-[35%] pb-16 pt-28"}>
           <AuthCard title={"Sign in"} className={"mt-28"}>
             <div>
               <p>Please enter your details to sign up.</p>

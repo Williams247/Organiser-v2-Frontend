@@ -186,7 +186,7 @@ export const List: FC<Props> = ({ data, mutate, percentageMutate }) => {
         note={fullViewActivity.note}
         id={fullViewActivity.activityId}
         open={fullViewActivity.open && fullViewActivity.type === "edit"}
-        isChecked={fullViewActivity.isChecked as boolean}
+        isChecked={fullViewActivity.isChecked!}
         loading={updating}
         updateActivties={({ isChecked, todo, note, id }) =>
           void updateActivties({ isChecked, todo, note, id })
