@@ -75,13 +75,13 @@ export const Navigation = () => {
                     <li
                       className={"text-[13px] hover:underline cursor-pointer"}
                     >
-                      <Link href={"/profile"}>View Profile</Link>
+                      <Link href={"/profile"}>View profile</Link>
                     </li>
                     <li
                       className={"text-[13px] hover:underline cursor-pointer"}
                       onClick={() => setOpenConfirm(!openConfirm)}
                     >
-                      Delete All Activities
+                      Delete all activities
                     </li>
                     <li
                       className={"text-[13px] hover:underline cursor-pointer"}

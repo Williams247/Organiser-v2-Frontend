@@ -65,7 +65,7 @@ const Users: NextPage = () => {
                                 disabled ? "text-[red]" : "text-[green]"
                               }`}
                             >
-                              {disabled ? "Inactive" : "Active"}
+                              {disabled ? "inactive" : "active"}
                             </p>
                             <p className={"mt-2 text-sm"}>{role}</p>
                             <FormButton
