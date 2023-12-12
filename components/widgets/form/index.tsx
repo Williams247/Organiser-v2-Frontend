@@ -32,7 +32,7 @@ export const FormSearhFilter: FC<Props> = ({
   const [isSet, setIsSet] = useState(false);
 
   const sendSearchRequest = () => {
-    if (searchType === "todo" && !todoSearchKeyWord || searchType === "notes" && !noteSearchKeyWord) {
+    if (searchType === "todos" && !todoSearchKeyWord || searchType === "notes" && !noteSearchKeyWord) {
       setIsSet(true);
       return;
     }
@@ -53,8 +53,8 @@ export const FormSearhFilter: FC<Props> = ({
                 type={"text"}
                 placeholder={"Search by todo..."}
                 onChange={(e) => {
-                  setTodoSearchKeyWord(e.target.value.trim());
-                  setIsSet(e.target.value.trim().length === 0 ? true : false);
+                  setTodoSearchKeyWord(e.target.value);
+                  setIsSet(e.target.value.length === 0 ? true : false);
                 }}
                 className={
                   "outline-none px-3 text-[13px] py-2 w-full bg-transparent border border-[#cac5c5] rounded-lg"
@@ -67,8 +67,8 @@ export const FormSearhFilter: FC<Props> = ({
                 type={"text"}
                 placeholder={"Search by note..."}
                 onChange={(e) => {
-                  setNoteSearchKeyWord(e.target.value.trim());
-                  setIsSet(e.target.value.trim().length === 0 ? true : false);
+                  setNoteSearchKeyWord(e.target.value);
+                  setIsSet(e.target.value.length === 0 ? true : false);
                 }}
                 className={
                   "outline-none px-3 text-[13px] py-2 w-full bg-transparent border border-[#cac5c5] rounded-lg"

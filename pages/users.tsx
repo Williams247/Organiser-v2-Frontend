@@ -1,11 +1,11 @@
+import { Back } from "@components/icons";
 import { Loader } from "@components/loader";
 import { FormButton } from "@components/widgets";
-import { useEnableDisableUser,useFetchUsers } from "@hooks/useUsers";
+import { useEnableDisableUser, useFetchUsers } from "@hooks/useUsers";
 import { NextPage } from "next";
+import { useRouter } from "next/router"
 import { useEffect, useState } from "react";
 import Pagination from "react-responsive-pagination";
-
-import { Layout } from "../layout";
 
 const Users: NextPage = () => {
   const [idLoading, setIdLoading] = useState("");
@@ -21,6 +21,8 @@ const Users: NextPage = () => {
     enableDisable,
     success,
   } = useEnableDisableUser();
+
+  const { back } = useRouter();
 
   useEffect(() => {
     if (!enableDisableLoading && success) {
@@ -38,9 +40,12 @@ const Users: NextPage = () => {
       {loading ? (
         <Loader />
       ) : (
-        <div>
+        <div className={"container"}>
+          <button className={"flex mt-10 gap-1"} onClick={() => back()}>
+            <Back className={"mt-[1px]"} /> <span className={"mt-[1px] text-[13px]"}>Go Back</span>
+          </button>
           {data && data.results && (
-            <Layout>
+            <div>
               <div className={"h-screen flex justify-center container"}>
                 <div className={"w-[90%] sm:w-[90%] md:w-[70%]"}>
                   <div className={"pb-16 pt-28"}>
@@ -97,7 +102,7 @@ const Users: NextPage = () => {
                   </div>
                 </div>
               </div>
-            </Layout>
+            </div>
           )}
         </div>
       )}
