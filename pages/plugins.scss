@@ -18,7 +18,9 @@
 }
 
 ol {
-  padding: 38px;
+  padding-top: 15px;
+  padding-left: 38px;
+  padding-right: 38px;
   word-break: break-all;
   li {
     list-style-type: decimal !important;
@@ -26,7 +28,9 @@ ol {
 }
 
 ul {
-  padding: 38px;
+  padding-top: 15px;
+  padding-left: 38px;
+  padding-right: 38px;
   word-break: break-all;
   li {
     list-style-type: disc !important;
