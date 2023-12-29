@@ -1,5 +1,4 @@
 import { UseTextToAudio } from '@hooks/useTextToAudio';
-import { Speaker } from '@icons/Speaker';
 import { Modal } from '@widgets/Modal';
 import { FC } from 'react';
 
@@ -20,7 +19,6 @@ export const FullView: FC<Props> = ({
   createdAt,
   updatedAt,
 }) => {
-  const { speakOut } = UseTextToAudio({ text: note });
   return (
     <Modal open={open} onClose={onClose}>
       <p className={'font-bold mt-4 text-[14px]'}>Todo:</p>
@@ -41,9 +39,6 @@ export const FullView: FC<Props> = ({
 
       <div className={'flex justify-between'}>
         <p className={'font-bold mt-4 text-[14px]'}>Note:</p>
-        <button onClick={speakOut} title={'Listen to your note'}>
-          <Speaker className={'mt-[11px]'} />
-        </button>
       </div>
 
       <div

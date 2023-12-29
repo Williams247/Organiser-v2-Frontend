@@ -1,5 +1,5 @@
-import { FC } from 'react';
-import { UseFormReturn } from 'react-hook-form';
+import { FC } from "react";
+import { UseFormReturn } from "react-hook-form";
 import {
   BtnBold,
   BtnItalic,
@@ -7,7 +7,9 @@ import {
   Editor,
   EditorProvider,
   Toolbar,
-} from 'react-simple-wysiwyg';
+  BtnBulletList,
+  BtnNumberedList,
+} from "react-simple-wysiwyg";
 
 type ChangeEventProps = React.FormEvent<HTMLInputElement>;
 
@@ -24,7 +26,7 @@ export const FormWiziwig: FC<Props> = ({
   handler,
   title,
   onChange,
-  placeholder
+  placeholder,
 }) => {
   const {
     formState: { errors },
@@ -40,7 +42,7 @@ export const FormWiziwig: FC<Props> = ({
 
   return (
     <>
-      <div className={className ?? ''}>
+      <div className={className ?? ""}>
         <EditorProvider>
           <Editor
             value={value}
@@ -52,11 +54,13 @@ export const FormWiziwig: FC<Props> = ({
               <BtnBold />
               <BtnItalic />
               <BtnUnderline />
+              <BtnBulletList />
+              <BtnNumberedList />
             </Toolbar>
           </Editor>
         </EditorProvider>
         {errors[title] && (
-          <p className={'text-red-600'}>{errors[title]?.message as string}</p>
+          <p className={"text-red-600"}>{errors[title]?.message as string}</p>
         )}
       </div>
     </>

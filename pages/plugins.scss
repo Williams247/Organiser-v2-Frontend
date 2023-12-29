@@ -13,5 +13,22 @@
     text-align: center;
     padding-top: 9px;
     font-size: 14px !important;
+    list-style-type: none !important;
+  }
+}
+
+ol {
+  padding: 38px;
+  word-break: break-all;
+  li {
+    list-style-type: decimal !important;
+  }
+}
+
+ul {
+  padding: 38px;
+  word-break: break-all;
+  li {
+    list-style-type: disc !important;
   }
 }
