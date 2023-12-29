@@ -2,13 +2,13 @@ import { FC } from "react";
 import { UseFormReturn } from "react-hook-form";
 import {
   BtnBold,
+  BtnBulletList,
   BtnItalic,
+  BtnNumberedList,
   BtnUnderline,
   Editor,
   EditorProvider,
   Toolbar,
-  BtnBulletList,
-  BtnNumberedList,
 } from "react-simple-wysiwyg";
 
 type ChangeEventProps = React.FormEvent<HTMLInputElement>;
