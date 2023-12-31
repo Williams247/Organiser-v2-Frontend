@@ -71,7 +71,7 @@ export const Navigation = () => {
                     "absolute bg-white rounded-lg w-[180px] h-[80px] -ml-[120px] mt-10 px-4 py-3"
                   }
                 >
-                  <ul>
+                  <ul id={"navigation_dropdown"}>
                     <li
                       className={"text-[13px] hover:underline cursor-pointer"}
                     >

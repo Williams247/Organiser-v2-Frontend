@@ -13,3 +13,10 @@ body {
   @apply p-0 m-0 box-border bg-[#eee8e8];
   font-family: 'Nunito Sans', sans-serif;
 }
+
+#navigation_dropdown {
+  padding: 0 !important;
+  li {
+    list-style-type: none !important;
+  }
+}
