@@ -15,6 +15,7 @@ export const useAxios = (): UseAxiosResponse => {
   axios.interceptors.request.use((config) => {
     setLoading(true);
     const token = localStorage.getItem(AppName);
+    
     if (token) {
       const headers = config.headers ?? ({} as AxiosRequestHeaders);
       headers.Authorization = token;

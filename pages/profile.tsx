@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Loader } from "@components/loader";
 import {
   FormButton,
@@ -13,6 +14,9 @@ import {
   useFetchActivityPercentage,
 } from "@hooks/useActivities";
 import { useFetchProfile, useUpdateProfile } from "@hooks/useProfile";
+import { useFetchMessages } from "@hooks/useMessage/useFetchMessages";
+import { useDeleteMessage } from "@hooks/useMessage/useDeleteMessage";
+import { useDeleteMessages } from "@hooks/useMessage/useDeleteMessages";
 import { ProfileForm, UpdateProfileSchema } from "@hooks/useProfile/utils";
 import { ActivitesForm } from "@hooks/utils/form/activities";
 import { ActivitesSchema } from "@hooks/utils/validation";
@@ -25,12 +29,20 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-
+import Pagination from "react-responsive-pagination";
 import { Layout } from "../layout";
+import { ConfirmModal } from "@components/modal";
 
 const Profile: NextPage = () => {
   const { push } = useRouter();
+  const [messageModal, setMessageModal] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [deleteMessageId, setDeleteMessageId] = useState("");
+  const [openDeleteAmessageConfirm, setDeleteAmessageConfirm] = useState(false);
+  const [openDeleteAllMessagesConfirm, setDeleteAllMessagesConfirm] =
+    useState(false);
   const { profile, loading, success, mutate } = useFetchProfile();
+
   const {
     loading: fetching,
     createActivties,
@@ -51,6 +63,19 @@ const Profile: NextPage = () => {
     updateProfile,
     success: updateProfileSuccess,
   } = useUpdateProfile();
+
+  const {
+    loading: fetchingMessages,
+    success: fetchMessageSuccess,
+    data,
+    mutate: fetchMessageDelete,
+  } = useFetchMessages({
+    page: currentPage,
+    limit: 2,
+  });
+
+  const { loading: deletingMessage, deleteMessage } = useDeleteMessage();
+  const { loading: deleteingMessages, deleteMessages } = useDeleteMessages();
 
   const formHook = useForm<UserPayload>({
     mode: "onChange",
@@ -85,6 +110,21 @@ const Profile: NextPage = () => {
       void push("/activities");
     }
   }, [fetching, activitySuccess]);
+
+  const deleteMessageFunc = () => {
+    void deleteMessage(deleteMessageId).then(() => {
+      void fetchMessageDelete();
+      setDeleteMessageId("");
+      setDeleteAmessageConfirm(false);
+    });
+  };
+
+  const deleteMessagesFunc = () => {
+    void deleteMessages().then(() => {
+      void fetchMessageDelete();
+      setDeleteAllMessagesConfirm(false);
+    });
+  };
   return (
     <>
       {!loading && success ? (
@@ -142,12 +182,22 @@ const Profile: NextPage = () => {
                   </form>
                   <div className={"mt-3"}>
                     {profile?.role === Role.ADMIN && (
-                      <Link
-                        href={"/users"}
-                        className={"text-sm text-slate-700 hover:underline"}
-                      >
-                        view all users
-                      </Link>
+                      <div className={"flex gap-4"}>
+                        <Link
+                          href={"/users"}
+                          className={"text-base text-slate-700 hover:underline"}
+                        >
+                          view all users
+                        </Link>
+                        <button
+                          onClick={() => setMessageModal(true)}
+                          className={
+                            "text-sm text-slate-700 font-[500] hover:underline"
+                          }
+                        >
+                          View Messages
+                        </button>
+                      </div>
                     )}
                   </div>
                 </div>
@@ -187,6 +237,108 @@ const Profile: NextPage = () => {
             Create Activty
           </FormButton>
         </form>
+      </Modal>
+
+      <Modal
+        open={messageModal}
+        title={"Messages"}
+        onClose={() => setMessageModal(false)}
+      >
+        <div>
+          <div className={"flex justify-end"}>
+            {data?.results?.length ? (
+              <button
+                onClick={() => setDeleteAllMessagesConfirm(true)}
+                className={
+                  "bg-red-600 hover:bg-red-700 px-3 py-1 rounded-lg self-start text-white text-sm font-[600]"
+                }
+              >
+                Delete all messages
+              </button>
+            ) : (
+              <></>
+            )}
+          </div>
+
+          {fetchingMessages && !fetchMessageSuccess ? (
+            "Loading messages..."
+          ) : (
+            <>
+              {data?.results && (
+                <>
+                  {data.results.map(
+                    ({ _id, email, from, message, createdAt }, index) => (
+                      <div key={index} className={"mt-4"}>
+                        <div
+                          className={
+                            "flex justify-between border border-gray-400 px-3 py-3 rounded-lg text-gray-700"
+                          }
+                        >
+                          <div className={"text-sm"}>
+                            <p>
+                              <b>Email:</b> {email}
+                            </p>
+                            <p>
+                              <b>From:</b> {from}
+                            </p>
+                            <p>
+                              <b>Timestamp:</b>{" "}
+                              {new Date(createdAt).toDateString()}
+                            </p>
+                            <p>
+                              <b>Message:</b> {message}
+                            </p>
+                          </div>
+                          <button
+                            onClick={() => {
+                              setDeleteMessageId(_id);
+                              setDeleteAmessageConfirm(true);
+                            }}
+                            disabled={
+                              deleteMessageId === _id && deletingMessage
+                            }
+                            className={
+                              "bg-red-600 hover:bg-red-700 px-3 py-1 rounded-lg self-start text-white text-sm font-[600]"
+                            }
+                          >
+                            Delete
+                          </button>
+                        </div>
+                      </div>
+                    )
+                  )}
+                </>
+              )}
+
+              <ConfirmModal
+                open={openDeleteAmessageConfirm}
+                text={"Do you want to delete this message?"}
+                onClose={() => {
+                  setDeleteAmessageConfirm(false);
+                  setDeleteMessageId("");
+                }}
+                loading={deletingMessage}
+                onProceed={deleteMessageFunc}
+              />
+
+              <ConfirmModal
+                open={openDeleteAllMessagesConfirm}
+                text={"Are you sure you want to delete all messages?"}
+                onClose={() => setDeleteAllMessagesConfirm(false)}
+                loading={deleteingMessages}
+                onProceed={deleteMessagesFunc}
+              />
+
+              <div className={"flex justify-center"}>
+                <Pagination
+                  current={currentPage}
+                  total={data?.pages ?? 0}
+                  onPageChange={(value) => setCurrentPage(value)}
+                />
+              </div>
+            </>
+          )}
+        </div>
       </Modal>
     </>
   );
