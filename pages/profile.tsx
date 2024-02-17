@@ -1,5 +1,5 @@
-import { useState } from "react";
 import { Loader } from "@components/loader";
+import { ConfirmModal } from "@components/modal";
 import {
   FormButton,
   FormInput,
@@ -13,10 +13,10 @@ import {
   useFetchActivities,
   useFetchActivityPercentage,
 } from "@hooks/useActivities";
-import { useFetchProfile, useUpdateProfile } from "@hooks/useProfile";
-import { useFetchMessages } from "@hooks/useMessage/useFetchMessages";
 import { useDeleteMessage } from "@hooks/useMessage/useDeleteMessage";
 import { useDeleteMessages } from "@hooks/useMessage/useDeleteMessages";
+import { useFetchMessages } from "@hooks/useMessage/useFetchMessages";
+import { useFetchProfile, useUpdateProfile } from "@hooks/useProfile";
 import { ProfileForm, UpdateProfileSchema } from "@hooks/useProfile/utils";
 import { ActivitesForm } from "@hooks/utils/form/activities";
 import { ActivitesSchema } from "@hooks/utils/validation";
@@ -27,11 +27,12 @@ import { ActivitiesPayload } from "@utils/default";
 import { NextPage } from "next";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useState } from "react";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import Pagination from "react-responsive-pagination";
+
 import { Layout } from "../layout";
-import { ConfirmModal } from "@components/modal";
 
 const Profile: NextPage = () => {
   const { push } = useRouter();
